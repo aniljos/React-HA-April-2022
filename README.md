@@ -27,3 +27,14 @@
 12. Deployment
 
 
+## Scopes
+
+1. Hoisting: Variable or Function or Class declartions are hoisted(moved) to the top of the scope.
+2. No block scope in ES5, use a design pattern IIFE(immediatly invoked function expression) to create one.
+3. ES6 introduces the block scope => let and const
+4. let and const create a block scope and are not hoisted.
+5. Global scope: Visible everywhere. There is a global object and everthing declared globally are members of the global object. In the browser the global object is the window object
+
+## Functions
+
+1. First-class types: store it in a variable, pass a function as an argument to a function, return a function from a function
