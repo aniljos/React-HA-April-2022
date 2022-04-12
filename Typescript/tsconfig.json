@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
-        "target": "ES5",
+        "target": "ES6",
         "outDir": "public/scripts",
-        "noEmitOnError": true
+        "noEmitOnError": true,
+        "module": "ES6"
     }
 }
