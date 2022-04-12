@@ -4,11 +4,17 @@ const numbers = [1,2,3,4,5,6];
 console.log("numbers", numbers);
 
 const copy_of_numbers = [...numbers];
+
+
 console.log("copy_of_numbers", copy_of_numbers);
 
 numbers.push(7);
 console.log("numbers", numbers);
 console.log("copy_of_numbers", copy_of_numbers);
+
+const number2 = [200, 201, 203]
+const another_copy = [0, ...numbers, 10,11, ...number2]
+console.log("another_copy", another_copy);
 
 // const obj1 = {a: 1};
 // const obj2 = {a: 2};

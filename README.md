@@ -39,3 +39,9 @@
 ## Functions
 
 1. First-class types: store it in a variable, pass a function as an argument to a function, return a function from a function
+
+## NPM Install
+
+1. npm install lodash: This is a local installation(only for that project)
+2. npm install nodemon --save-dev: Local Dev dependency
+3. npm install nodemon -g: Global installation

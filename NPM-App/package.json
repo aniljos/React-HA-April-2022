@@ -1,0 +1,18 @@
+{
+  "name": "npm-app",
+  "version": "1.0.0",
+  "description": "A Demo Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "Anil Joseph",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
