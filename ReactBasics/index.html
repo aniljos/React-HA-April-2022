@@ -32,6 +32,21 @@
         
         //JSX
         ReactDOM.render(<div><h3>This is a JSX Element</h3></div>, document.getElementById("app3"));
+
+        //Component(reusebale)/ Custom HTML Element
+        // function or class
+        function MyComponent(){
+            //return the JSX(UI)
+            return (
+                <div>
+                    <h4>This is a React Componenet</h4>
+                    <p>This is useable</p>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<MyComponent/>, document.getElementById("app4"));
+
         
     </script>
 </body>
