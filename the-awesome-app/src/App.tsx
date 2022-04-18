@@ -4,6 +4,7 @@ import './App.css';
 import Alert from './components/Hello';
 import Counter from './components/Counter';
 
+
 function App() {
   return (
     <div className="App">
@@ -27,6 +28,8 @@ function App() {
 
           <Counter initCount={5}/>
           <Counter initCount={10}/>
+
+          
       </section>
     </div>
   );
