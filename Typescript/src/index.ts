@@ -48,6 +48,14 @@ emp1.location = "Mumbai";
 
 console.log("emp1 location", emp1.location);
 
+const numbers = [1,2,3,4,5,6,7];
+
+
+const squares = numbers.map((item, index) => {
+
+    return (item * item);
+})
+console.log("squares",squares);
 
 
 
