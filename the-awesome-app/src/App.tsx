@@ -5,6 +5,7 @@ import Alert from './components/Hello';
 import Counter from './components/Counter';
 import TypedCounter from './components/TypedCounter';
 import ListProducts from './components/ListProducts';
+import Search from './components/Search';
 
 
 function App() {
@@ -32,7 +33,8 @@ function App() {
           <Counter initCount={10}/>
           <TypedCounter initCount={10}/> */}
 
-          <ListProducts/>
+          {/* <ListProducts/> */}
+          <Search/>
       </section>
     </div>
   );

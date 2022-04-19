@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { ChangeEvent, Component } from 'react';
 import { Product } from '../model/Product';
 
 
 interface EditProductProps{
-    product: Product
+    product: Product,
+    onCancel? : (message: string) => void,
+    onSave? : (updatedProduct: Product) => void
 }
 
 interface EditProductState{
@@ -20,23 +22,59 @@ class EditProduct extends Component<EditProductProps, EditProductState>{
         super(props);
 
         this.state.currentProduct = this.props.product;
+        console.log("EditProduct constructor", this.props.product.id);
     }
-    static getDerivedStateFromProps(nextProps: EditProductProps, currentState: EditProductState){
+   
 
-        //return the new state
-        if(nextProps.product.id !== currentState.currentProduct?.id){
+    save = () => {
 
-            return {
-                currentProduct: nextProps.product
-            }
+        if(this.props.onSave && this.state.currentProduct !== null){
+
+            this.props.onSave(this.state.currentProduct);
         }
-        //return null for no state change
-        return null;
+    }
+    cancel = () => {
 
+        if(this.props.onCancel){
+            this.props.onCancel("The operation was cancelled");
+        }
     }
 
-    save = () => {}
-    cancel = () => {}
+    handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+
+        const value = e.target.value
+        if(value){
+            const updatedProduct = {...this.state.currentProduct};
+            updatedProduct.name = value;
+            this.setState({
+                currentProduct: updatedProduct
+            });
+        }
+    }
+
+    handleDescChange = (e: ChangeEvent<HTMLInputElement>) => {
+
+        const value = e.target.value
+        if(value){
+            const updatedProduct = {...this.state.currentProduct};
+            updatedProduct.description = value;
+            this.setState({
+                currentProduct: updatedProduct
+            });
+        }
+    }
+    handlePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
+
+        const value = e.target.value
+        if(value){
+            const updatedProduct = {...this.state.currentProduct};
+            updatedProduct.price = parseFloat(value);
+            this.setState({
+                currentProduct: updatedProduct
+            });
+        }
+    }
+
 
     render(): React.ReactNode {
         
@@ -49,17 +87,19 @@ class EditProduct extends Component<EditProductProps, EditProductState>{
 
                 <div>
                     <label htmlFor="name">Name</label>
-                    <input id="name" value={currentProduct?.name} />
+                    <input id="name" value={currentProduct?.name} onChange={this.handleNameChange}/>
                 </div>
 
                 <div>
                     <label htmlFor="price">Price</label>
-                    <input id="price" type="number" value={currentProduct?.price}/>
+                    <input id="price" type="number" value={currentProduct?.price} 
+                                                    onChange={this.handlePriceChange}/>
                 </div>
 
                 <div>
                     <label htmlFor="description">Description</label>
-                    <input id="description" value={currentProduct?.description}/>
+                    <input id="description" value={currentProduct?.description} 
+                                                     onChange={this.handleDescChange}/>
                 </div>
 
                 <div>
@@ -69,6 +109,20 @@ class EditProduct extends Component<EditProductProps, EditProductState>{
             </div>
         )
     }
+
+     // static getDerivedStateFromProps(nextProps: EditProductProps, currentState: EditProductState){
+
+    //     //return the new state
+    //     if(nextProps.product.id !== currentState.currentProduct?.id){
+
+    //         return {
+    //             currentProduct: nextProps.product
+    //         }
+    //     }
+    //     //return null for no state change
+    //     return null;
+
+    // }
 }
 
 export default EditProduct;
