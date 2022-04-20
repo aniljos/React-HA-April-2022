@@ -75,6 +75,9 @@ class EditProduct extends Component<EditProductProps, EditProductState>{
         }
     }
 
+    getProductId(){
+        alert("Updating Product " + this.state.currentProduct?.id);
+    }
 
     render(): React.ReactNode {
         

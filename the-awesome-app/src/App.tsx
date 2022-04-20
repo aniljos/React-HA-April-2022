@@ -5,7 +5,9 @@ import TypedCounter from "./components/TypedCounter";
 import ListProducts from "./components/ListProducts";
 import Search from "./components/Search";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter  as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter  as Router, Routes, Route, Link, Navigate } from "react-router-dom";
+import Login from "./components/Login";
+import HooksDemo from "./components/HooksDemo";
 
 function App() {
   return (
@@ -37,6 +39,16 @@ function App() {
                   Search
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link active" to="/login">
+                  Login
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link active" to="/hooks">
+                  React Hooks
+                </Link>
+              </li>
             </ul>
           </div>
         </nav>
@@ -47,6 +59,9 @@ function App() {
               <Route path="/counter" element={<TypedCounter initCount={5}/>} />
               <Route path="/products" element={<ListProducts/>}/>
               <Route path="/search" element={<Search/>}/>
+              <Route path="/login" element={<Login/>}/>
+              <Route path="/hooks" element={<HooksDemo/>}/>
+              <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
         </section>
 

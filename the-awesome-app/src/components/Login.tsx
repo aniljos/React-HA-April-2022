@@ -1,0 +1,67 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+function Login() {
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
+
+  async function handleLogin() {
+    try {
+      const url = process.env.REACT_APP_LOGIN_URL;
+      if (url) {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, password }),
+        });
+        if (response.ok) {
+          navigate("/products", {replace: true});
+          setMessage("");
+        } else {
+          setMessage("Invalid Credentials");
+        }
+      }
+    } catch (error) {
+      setMessage("Something went wrong..");
+    }
+  }
+  return (
+    <div>
+      <h3>Login</h3>
+
+      {message ? <div className="alert alert-danger">{message}</div> : null}
+
+      <div className="form-group">
+        <label htmlFor="name">Name</label>
+        <input
+          className="form-control"
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="password">Password</label>
+        <input
+          className="form-control"
+          id="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      <div>
+        <button className="btn btn-success" onClick={handleLogin}>
+          Login
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default Login;

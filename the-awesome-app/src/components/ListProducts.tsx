@@ -19,6 +19,7 @@ class ListProducts extends PureComponent<ListProductsProps, ListProductsState> {
   };
 
   count =0;
+  editProductRef = React.createRef<EditProduct>();
 
   constructor(props: ListProductsProps) {
     super(props);
@@ -124,6 +125,10 @@ class ListProducts extends PureComponent<ListProductsProps, ListProductsState> {
     }
   };
 
+  showProductId = () => {
+    this.editProductRef.current?.getProductId();
+  }
+
   renderProducts() {
     return this.state.products.map((item, index) => {
       return (
@@ -172,6 +177,7 @@ class ListProducts extends PureComponent<ListProductsProps, ListProductsState> {
         <div>
           {this.state.selectedProduct ? (
             <EditProduct
+              ref={this.editProductRef}
               key={this.state.selectedProduct.id}
               product={this.state.selectedProduct}
               onCancel={this.editCancel}
@@ -180,6 +186,9 @@ class ListProducts extends PureComponent<ListProductsProps, ListProductsState> {
           ) : null}
         </div>
         <br />
+        <div>
+          <button onClick={this.showProductId}>Show the Product ID</button>
+        </div>
         <br />
         <br />
         <br />
