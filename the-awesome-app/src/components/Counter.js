@@ -33,6 +33,7 @@ class Counter extends Component{
         }, () => {
             console.log("count", this.state.count);
         });
+        //console.log("count", this.state.count);
         
     }
     decr = () => {

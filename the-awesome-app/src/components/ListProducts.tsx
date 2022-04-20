@@ -18,6 +18,8 @@ class ListProducts extends PureComponent<ListProductsProps, ListProductsState> {
     selectedProduct: null,
   };
 
+  count =0;
+
   constructor(props: ListProductsProps) {
     super(props);
 
