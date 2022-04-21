@@ -1,0 +1,7 @@
+1. Implement the GadgetStore ==> Add to Cart
+2. Implement the ViewCart ==> Template code is in the Git/share
+				The reducer has to be updated
+
+
+3. Customers: http://localhost:9000/customers
+		Implement the CRUD,similar to products, use functional components.
