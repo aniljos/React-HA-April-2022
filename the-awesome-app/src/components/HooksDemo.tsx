@@ -1,17 +1,27 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useImperativeHandle } from 'react';
 
 interface SimpleProps{
     count: number,
     onUpdate: (value: number) => void 
 }
 
-
+interface SimpleType{
+    message: string;
+    execute: () => void
+}
 // React.forwardRef => Use this to get a refrenec to a functional componet
 // React.memo => React 16.3
 // The component with be updated only if the state or props changes
 
 
 const Simple =  React.memo(React.forwardRef((props: SimpleProps, ref)=>{
+
+    useImperativeHandle(ref, () => {
+        return {
+            message: "This a reference the simple component",
+            execute
+        }
+    });
 
     console.log("rendering simple component");
 
@@ -36,7 +46,7 @@ function HooksDemo(){
 
     const [count, setCount] = useState(0);
     const [message, setMessage] = useState("Hello");
-    const simpleRef = useRef(null);
+    const simpleRef = useRef<SimpleType>(null);
 
    // var x = 10;
 
@@ -51,6 +61,7 @@ function HooksDemo(){
 
     function invokeSimpleExecute(){
         console.log("simpleRef", simpleRef);
+        simpleRef.current?.execute();
     }
     return (
         <div>

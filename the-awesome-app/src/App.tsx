@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter  as Router, Routes, Route, Link, Navigate } from "react-router-dom";
 import Login from "./components/Login";
 import HooksDemo from "./components/HooksDemo";
+import GadgetStore from "./components/GadgetStore";
 
 function App() {
   return (
@@ -49,6 +50,16 @@ function App() {
                   React Hooks
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link active" to="/gadgets">
+                  Gadget Store
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link active" to="/cart">
+                  View Cart
+                </Link>
+              </li>
             </ul>
           </div>
         </nav>
@@ -61,6 +72,7 @@ function App() {
               <Route path="/search" element={<Search/>}/>
               <Route path="/login" element={<Login/>}/>
               <Route path="/hooks" element={<HooksDemo/>}/>
+              <Route path="/gadgets" element={<GadgetStore/>}/>
               <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
         </section>
