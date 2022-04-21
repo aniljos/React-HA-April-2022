@@ -9,6 +9,7 @@ import { BrowserRouter  as Router, Routes, Route, Link, Navigate } from "react-r
 import Login from "./components/Login";
 import HooksDemo from "./components/HooksDemo";
 import GadgetStore from "./components/GadgetStore";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -68,8 +69,8 @@ function App() {
             <Routes>
               <Route path="/home" element={<Alert title="Message" message="This is a React Component"/>}/>
               <Route path="/counter" element={<TypedCounter initCount={5}/>} />
-              <Route path="/products" element={<ListProducts/>}/>
-              <Route path="/search" element={<Search/>}/>
+              <Route path="/products" element={<ProtectedRoute> <ListProducts/> </ProtectedRoute>}/>
+              <Route path="/search" element={<ProtectedRoute><Search/></ProtectedRoute>}/>
               <Route path="/login" element={<Login/>}/>
               <Route path="/hooks" element={<HooksDemo/>}/>
               <Route path="/gadgets" element={<GadgetStore/>}/>

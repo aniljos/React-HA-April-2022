@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import {useDispatch} from 'react-redux';
+import { AppDisptach } from "../redux/store";
 
 function Login() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDisptach>();
+  const location = useLocation();
+
+  console.log("Login location", location);
 
   async function handleLogin() {
     try {
@@ -20,10 +25,46 @@ function Login() {
           body: JSON.stringify({ name, password }),
         });
         if (response.ok) {
-          navigate("/products", {replace: true});
+
+          const data = await response.json();
+
+          //update the redux store
+          dispatch({
+            type: "SET_AUTH",
+            payload: {
+              isAuthenticated: true,
+              userName: name,
+              accessToken: data.accessToken,
+              refreshToken: data.refreshToken
+            }
+          });
+
+
+          //navigate("/products", {replace: true});
+          if(location.state){
+              const to: any = location.state;
+              navigate(to, {replace: true});
+          }
+          else{
+              navigate("/home", {replace: true});
+          }
+         
           setMessage("");
         } else {
+
           setMessage("Invalid Credentials");
+          //update the redux store
+          dispatch({
+            type: "SET_AUTH",
+            payload: {
+              isAuthenticated: false,
+              userName: "",
+              accessToken: "",
+              refreshToken: ""
+            }
+          });
+
+
         }
       }
     } catch (error) {

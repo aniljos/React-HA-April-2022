@@ -1,5 +1,5 @@
 
-interface AuthData {
+export interface AuthData {
 
     isAuthenticated: boolean,
     userName: string,
@@ -7,7 +7,7 @@ interface AuthData {
     refreshToken: string
 }
 
-interface AuthAction{
+export interface AuthAction{
     type: string,
     payload: AuthData
 }
