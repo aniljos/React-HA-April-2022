@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import HooksDemo from "./components/HooksDemo";
 import GadgetStore from "./components/GadgetStore";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ViewCart from "./components/ViewCart";
 
 function App() {
   return (
@@ -74,6 +75,7 @@ function App() {
               <Route path="/login" element={<Login/>}/>
               <Route path="/hooks" element={<HooksDemo/>}/>
               <Route path="/gadgets" element={<GadgetStore/>}/>
+              <Route path="/cart" element={<ViewCart/>}/>
               <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
         </section>

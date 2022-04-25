@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Product } from '../model/Product';
+import { AppDisptach } from '../redux/store';
 
 function GadgetStore(){
 
     const [products, setProducts] = useState<Array<Product>>([]);
-    
+    const dispatch = useDispatch<AppDisptach>();
+
     useEffect(() => {
 
         fetchProducts();
@@ -34,6 +37,10 @@ function GadgetStore(){
             console.log("error", error);
         }
     }
+    function addToCart(product: Product){
+
+        dispatch({type: "ADDTOCART", cartItem: {product, quantity: 1}});
+    }
 
     function renderProducts() {
 
@@ -45,7 +52,7 @@ function GadgetStore(){
                             <h5 className="card-title">{item.name}</h5>
                             <p className="card-text">{item.description}</p>
                             <p className="card-text text-primary">INR {item.price}</p>
-                            <button className="btn btn-primary">Add To Cart</button>
+                            <button className="btn btn-primary" onClick={() => addToCart(item)}>Add To Cart</button>
                         </div>
                     </div>
                 </div>

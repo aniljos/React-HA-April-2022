@@ -22,10 +22,24 @@ export const gadgetsReducer = (state: GadgetStoreState=initData, action: GadgetS
             const cart = [...state.cart];
             cart.push(cartItem);
             return {
-                ...cart
+                cart
             }
         }
         
+    }
+    if(action.type === "REMOVECARTITEM"){
+
+        if(action.productId){
+            const cart = [...state.cart];
+            const indexOfItemRemove = cart.findIndex(item => item.product?.id === action.productId);
+            if(indexOfItemRemove !== -1){
+                cart.splice(indexOfItemRemove, 1);
+                return {
+                    cart
+                }
+            }
+        }
+
     }
     return state;
 }
