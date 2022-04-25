@@ -11,6 +11,7 @@ import HooksDemo from "./components/HooksDemo";
 import GadgetStore from "./components/GadgetStore";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ViewCart from "./components/ViewCart";
+import GadgetStoreRedux from "./components/GadgetStoreRedux";
 
 function App() {
   return (
@@ -58,6 +59,11 @@ function App() {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link className="nav-link active" to="/gadgets-redux">
+                  Gadget Store Redux
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link active" to="/cart">
                   View Cart
                 </Link>
@@ -75,6 +81,7 @@ function App() {
               <Route path="/login" element={<Login/>}/>
               <Route path="/hooks" element={<HooksDemo/>}/>
               <Route path="/gadgets" element={<GadgetStore/>}/>
+              <Route path="/gadgets-redux" element={<GadgetStoreRedux/>}/>
               <Route path="/cart" element={<ViewCart/>}/>
               <Route path="*" element={<Navigate to="/login" />} />
             </Routes>

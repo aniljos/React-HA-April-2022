@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { CartItem } from '../model/CartItem';
 import { Product } from '../model/Product';
+import { createAddToCartAction } from '../redux/actionCreators';
 import { AppDisptach } from '../redux/store';
 
 function GadgetStore(){
@@ -39,7 +41,8 @@ function GadgetStore(){
     }
     function addToCart(product: Product){
 
-        dispatch({type: "ADDTOCART", cartItem: {product, quantity: 1}});
+        //dispatch({type: "ADDTOCART", cartItem: {product, quantity: 1}});
+        dispatch(createAddToCartAction(new CartItem(product, 1)));
     }
 
     function renderProducts() {
