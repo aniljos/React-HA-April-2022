@@ -12,65 +12,14 @@ import GadgetStore from "./components/GadgetStore";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ViewCart from "./components/ViewCart";
 import GadgetStoreRedux from "./components/GadgetStoreRedux";
+import Header from "./components/Header";
+import UseReducerDemo from "./components/UseReducerDemo";
 
 function App() {
   return (
     <Router>
       <div className="container-fluid">
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div className="container-fluid">
-            <a className="navbar-brand" href="#">
-              React
-            </a>
-            <ul className="nav">
-              <li className="nav-item">
-                <Link className="nav-link active" to="/home">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/counter">
-                  Counter
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/products">
-                  Products
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/search">
-                  Search
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/login">
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/hooks">
-                  React Hooks
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/gadgets">
-                  Gadget Store
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/gadgets-redux">
-                  Gadget Store Redux
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/cart">
-                  View Cart
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        <Header/>
         {/* Content Area */}
         <section>
             <Routes>
@@ -83,6 +32,7 @@ function App() {
               <Route path="/gadgets" element={<GadgetStore/>}/>
               <Route path="/gadgets-redux" element={<GadgetStoreRedux/>}/>
               <Route path="/cart" element={<ViewCart/>}/>
+              <Route path="/reducer" element={<UseReducerDemo/>}/>
               <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
         </section>
