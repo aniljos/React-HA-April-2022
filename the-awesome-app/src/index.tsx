@@ -7,17 +7,20 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { AppThemeContext } from "./context/AppThemeContext";
 import AppThemeProvider from "./context/AppThemeProvider";
+import AppErrorBoundary from "./components/AppErrorBoundary";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <AppThemeProvider>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </AppThemeProvider>
+    <AppErrorBoundary>
+      <AppThemeProvider>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </AppThemeProvider>
+    </AppErrorBoundary>
   </React.StrictMode>
 );
 

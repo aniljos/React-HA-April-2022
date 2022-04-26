@@ -2,9 +2,13 @@ import React, { Component, PureComponent } from "react";
 import { Product } from "../model/Product";
 import EditProduct from "./EditProduct";
 import "./ListProducts.css";
+import {connect} from 'react-redux';
+import { AppRootState } from "../redux/store";
 
 //props
-interface ListProductsProps {}
+interface ListProductsProps {
+  appUserName: string
+}
 //state
 interface ListProductsState {
   products: Array<Product>;
@@ -13,6 +17,7 @@ interface ListProductsState {
 
 // <ListProducts />
 class ListProducts extends PureComponent<ListProductsProps, ListProductsState> {
+  
   state: ListProductsState = {
     products: new Array<Product>(),
     selectedProduct: null,
@@ -164,6 +169,7 @@ class ListProducts extends PureComponent<ListProductsProps, ListProductsState> {
     return (
       <div>
         <h3>List Products</h3>
+        <h4>Welcome {this.props.appUserName}</h4>
         <div
           style={{
             display: "flex",
@@ -173,6 +179,10 @@ class ListProducts extends PureComponent<ListProductsProps, ListProductsState> {
         >
           {this.renderProducts()}
         </div>
+
+        {/* <div>
+            SelectedProduct : {this.state.selectedProduct!.id}
+        </div> */}
 
         <div>
           {this.state.selectedProduct ? (
@@ -223,4 +233,19 @@ class ListProducts extends PureComponent<ListProductsProps, ListProductsState> {
   }
 }
 
-export default ListProducts;
+//Read the redux state
+const mapStateToProps = (state: AppRootState)=>{
+  return {
+    appUserName: state.auth.userName
+  }
+};
+
+//update the redux state(dispatch action)
+
+
+//export default ListProducts;
+export default connect(mapStateToProps)(ListProducts);
+
+// const fn = connect();
+// const afn = fn(ListProducts);
+// export default afn;

@@ -1,4 +1,5 @@
 import React, {ChangeEvent, useState, useEffect, useRef} from 'react';
+import { withBorder } from './withBorderHOC';
 
 // const array = useState("");
 // //array had 2 elements => 1st element is a variable, 2nd element is a function(chnage the variale)
@@ -84,5 +85,5 @@ function Search(){
     )
 }
 
-export default Search;
+export default withBorder(Search);
 

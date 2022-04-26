@@ -70,6 +70,7 @@ app.post("/refreshToken", authController.refreshToken);
 app.get("/products", (req, resp) => {
 
     resp.json(products);
+    
 });
 app.get("/secure_products", (req, resp) => {
 
