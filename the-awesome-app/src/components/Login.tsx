@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {useDispatch} from 'react-redux';
 import { AppDisptach } from "../redux/store";
+import Input, { InputType } from "./Input";
 
 function Login() {
   const [name, setName] = useState("");
@@ -10,8 +11,16 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDisptach>();
   const location = useLocation();
+  const nameInputRef = useRef<InputType>(null);
 
-  console.log("Login location", location);
+  useEffect(() => {
+
+    console.log("nameInputRef", nameInputRef.current);
+    //nameInputRef.current!.focus()
+    nameInputRef.current!.inputRef.focus();
+  }, [])
+
+
 
   async function handleLogin() {
 
@@ -79,7 +88,7 @@ function Login() {
 
       {message ? <div className="alert alert-danger">{message}</div> : null}
 
-      <div className="form-group">
+      {/* <div className="form-group">
         <label htmlFor="name">Name</label>
         <input
           className="form-control"
@@ -87,17 +96,26 @@ function Login() {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-      </div>
-      <div className="form-group">
+      </div> */}
+      <Input label="Name" id="name" type="text" 
+            placeholder="Name" className="abc" value={name}  
+                      onChange={(e) => setName(e.target.value)} ref={nameInputRef}/>
+
+      <Input label="Password" type="password" value={password} placeholder="********"
+          onChange={(e) => setPassword(e.target.value)}/>
+
+
+      {/* <div className="form-group">
         <label htmlFor="password">Password</label>
         <input
           className="form-control"
           id="password"
           type="password"
           value={password}
+          placeholder="********"
           onChange={(e) => setPassword(e.target.value)}
         />
-      </div>
+      </div> */}
       <div>
         <button className="btn btn-success" onClick={handleLogin}>
           Login

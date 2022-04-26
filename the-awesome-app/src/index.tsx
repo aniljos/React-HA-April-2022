@@ -8,7 +8,7 @@ import { store } from "./redux/store";
 import { AppThemeContext } from "./context/AppThemeContext";
 import AppThemeProvider from "./context/AppThemeProvider";
 import AppErrorBoundary from "./components/AppErrorBoundary";
-
+import MuiApp from './MuiApp';
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -17,7 +17,8 @@ root.render(
     <AppErrorBoundary>
       <AppThemeProvider>
         <Provider store={store}>
-          <App />
+          {/* <App /> */}
+          <MuiApp/>
         </Provider>
       </AppThemeProvider>
     </AppErrorBoundary>
