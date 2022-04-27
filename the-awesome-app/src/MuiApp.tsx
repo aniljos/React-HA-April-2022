@@ -26,6 +26,7 @@ import {
 } from "react-router-dom";
 import { Grid } from "@mui/material";
 import LoadingComponent from "./components/LoadingComponent";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function ListMenuItems(props: { onClose: () => void }) {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ function ListMenuItems(props: { onClose: () => void }) {
 
   return (
     <List>
-      {AppRoutes.map((item, index) => {
+      {AppRoutes.filter(item => item.menu).map((item, index) => {
         const Icon = item.icon;
         return (
           <ListItem
@@ -122,13 +123,26 @@ function MuiApp() {
               
                 {AppRoutes.map((item, index) => {
                   const Component = item.component;
-                  return (
-                    <Route
-                      key={item.id}
-                      path={item.path}
-                      element={<Component />}
-                    />
-                  );
+
+                  if(item.secure){
+                    return (
+                      <Route
+                        key={item.id}
+                        path={item.path}
+                        element={<ProtectedRoute> <Component /> </ProtectedRoute>}
+                      />
+                    );
+                  }
+                  else{
+                    return (
+                      <Route
+                        key={item.id}
+                        path={item.path}
+                        element={<Component />}
+                      />
+                    );
+                  }
+                  
                 })}
              
             </Routes>

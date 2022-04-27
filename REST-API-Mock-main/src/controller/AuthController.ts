@@ -26,7 +26,7 @@ export const loginAction = (req: Request<any>, resp: Response<any>)=> {
     const user =
         users.find(item => item.name === reqUser.name && item.password === reqUser.password);   
     if (user) {
-        const accessToken = jwt.sign(user, JWT_ACCESS_TOKEN_SECRET, { expiresIn: '5m' });
+        const accessToken = jwt.sign(user, JWT_ACCESS_TOKEN_SECRET, { expiresIn: '30s' });
         const refreshToken = jwt.sign(user, JWT_REFRESH_TOKEN_SECRET);
         refreshTokens.push(refreshToken);
         resp.json({ accessToken, refreshToken });

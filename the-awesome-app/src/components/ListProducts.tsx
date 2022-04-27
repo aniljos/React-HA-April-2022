@@ -2,13 +2,17 @@ import React, { Component, PureComponent } from "react";
 import { Product } from "../model/Product";
 import EditProduct from "./EditProduct";
 import "./ListProducts.css";
-import {connect} from 'react-redux';
-import { AppRootState } from "../redux/store";
+import { connect } from "react-redux";
+import { AppDisptach, AppRootState } from "../redux/store";
 import { trackPromise } from "react-promise-tracker";
+import { AuthData, authReducer } from "../redux/authReducer";
 
 //props
 interface ListProductsProps {
-  appUserName: string
+  appUserName: string;
+  //accessToken: string;
+  auth: AuthData,
+  setAuthData: (authData: AuthData) => void
 }
 //state
 interface ListProductsState {
@@ -18,13 +22,12 @@ interface ListProductsState {
 
 // <ListProducts />
 class ListProducts extends PureComponent<ListProductsProps, ListProductsState> {
-  
   state: ListProductsState = {
     products: new Array<Product>(),
     selectedProduct: null,
   };
 
-  count =0;
+  count = 0;
   editProductRef = React.createRef<EditProduct>();
 
   constructor(props: ListProductsProps) {
@@ -47,26 +50,68 @@ class ListProducts extends PureComponent<ListProductsProps, ListProductsState> {
     //     });
 
     this.fetchProducts();
-   
   }
 
   fetchProducts = async () => {
-     //async and await
-     try {
-      const url = "http://localhost:9000/products";
-      const response = await trackPromise(fetch(url));
-      
-      console.log("response", response);
-      const data = await response.json();
-      console.log("data", data);
+    //async and await
+    try {
+      //const url = "http://localhost:9000/products";
+      const url = process.env.REACT_APP_PRODUCTS_URL;
 
-      this.setState({
-        products: data,
-      });
+      if (url) {
+        const response = await trackPromise(fetch(url, {
+          headers: {
+            "authorization" : "bearer " + this.props.auth.accessToken
+          }
+        }));
+        if(response.ok){
+          console.log("response", response);
+          const data = await response.json();
+          console.log("data", data);
+  
+          this.setState({
+            products: data,
+          });
+        }
+        else{
+
+          if(response.status === 403){
+            const refreshUrl = "http://localhost:9000/refreshToken";
+            try{
+                const refreshRespone = await fetch(refreshUrl, {
+                  method: "POST",
+                  body: JSON.stringify({token: this.props.auth.refreshToken}),
+                  headers: {
+                    "content-type": "application/json"
+                  }
+
+                });
+                if(refreshRespone.ok){
+                  const {accessToken} = await refreshRespone.json();
+                  this.props.setAuthData({
+                    ...this.props.auth,
+                    accessToken: accessToken
+                  });
+
+                  this.fetchProducts();
+
+
+                }
+            }
+            catch(error){
+
+            }
+          }
+
+
+        }
+
+       
+      }
     } catch (error) {
       console.log("error", error);
     }
-  }
+  };
   deleteProduct = async (product: Product, index: number) => {
     try {
       const url = "http://localhost:9000/products/" + product.id;
@@ -112,29 +157,25 @@ class ListProducts extends PureComponent<ListProductsProps, ListProductsState> {
         body: JSON.stringify(updatedProduct),
         headers: {
           "Content-Type": "application/json",
-        }
+        },
       });
-      if(response.ok){
-
+      if (response.ok) {
         alert("updated the record");
         this.fetchProducts();
         this.setState({
-          selectedProduct: null
+          selectedProduct: null,
         });
-
+      } else {
+        alert("update record failed");
       }
-      else{
-        alert("update record failed")
-      }
-
     } catch (error) {
-      alert("update record error")
+      alert("update record error");
     }
   };
 
   showProductId = () => {
     this.editProductRef.current?.getProductId();
-  }
+  };
 
   renderProducts() {
     return this.state.products.map((item, index) => {
@@ -236,17 +277,25 @@ class ListProducts extends PureComponent<ListProductsProps, ListProductsState> {
 }
 
 //Read the redux state
-const mapStateToProps = (state: AppRootState)=>{
+const mapStateToProps = (state: AppRootState) => {
   return {
-    appUserName: state.auth.userName
-  }
+    appUserName: state.auth.userName,
+    auth: state.auth
+  };
 };
 
 //update the redux state(dispatch action)
+const mapDispatchToProps = (dispatch: AppDisptach) => {
+
+  return {
+    setAuthData: (authData: AuthData) => {dispatch({type: "SET_AUTH", payload: authData})}
+  }
+
+}
 
 
 //export default ListProducts;
-export default connect(mapStateToProps)(ListProducts);
+export default connect(mapStateToProps, mapDispatchToProps)(ListProducts);
 
 // const fn = connect();
 // const afn = fn(ListProducts);

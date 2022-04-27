@@ -10,6 +10,7 @@ import CategoryIcon from '@mui/icons-material/Category';
 import DevicesOtherIcon from '@mui/icons-material/DevicesOther';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
+import Login from '../components/Login';
 
 //static import
     //import ListProducts from "../components/ListProducts"
@@ -83,5 +84,14 @@ export const AppRoutes: Array<AppRoute> = [
         secure: true,
         menu: true,
         icon: SearchIcon
+    },
+    {
+        id: 7,
+        title: "Login",
+        path: "/login",
+        component: Login,
+        secure: false,
+        menu: false,
+        icon: HomeIcon
     }
 ] 
