@@ -4,6 +4,7 @@ import EditProduct from "./EditProduct";
 import "./ListProducts.css";
 import {connect} from 'react-redux';
 import { AppRootState } from "../redux/store";
+import { trackPromise } from "react-promise-tracker";
 
 //props
 interface ListProductsProps {
@@ -53,7 +54,8 @@ class ListProducts extends PureComponent<ListProductsProps, ListProductsState> {
      //async and await
      try {
       const url = "http://localhost:9000/products";
-      const response = await fetch(url);
+      const response = await trackPromise(fetch(url));
+      
       console.log("response", response);
       const data = await response.json();
       console.log("data", data);

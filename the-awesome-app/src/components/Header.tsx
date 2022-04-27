@@ -80,6 +80,11 @@ const Header = React.memo(()=>{
                 </Link>
               </li>
               <li className="nav-item">
+                <Link className="nav-link active" to="/customers">
+                  Customers
+                </Link>
+              </li>
+              <li className="nav-item">
                 <ThemeSwitcherButton/>
               </li>
             </ul>

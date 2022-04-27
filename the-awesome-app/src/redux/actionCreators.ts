@@ -1,3 +1,4 @@
+import { trackPromise } from 'react-promise-tracker';
 import { AppDisptach } from './store';
 import { GadgetStoreAction } from './gadgetsReducer';
 import { CartItem } from './../model/CartItem';
@@ -29,7 +30,7 @@ export const createSaveProductsAction = () => {
             const productsUrl = process.env.REACT_APP_PRODUCTS_URL;
             if(productsUrl){
 
-                const response = await fetch(productsUrl);
+                const response =  await trackPromise(fetch(productsUrl));
                 if(response.ok){
                     const data: Array<Product> = await response.json();
                     dispatch({

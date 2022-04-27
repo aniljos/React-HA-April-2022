@@ -14,6 +14,7 @@ import ViewCart from "./components/ViewCart";
 import GadgetStoreRedux from "./components/GadgetStoreRedux";
 import Header from "./components/Header";
 import UseReducerDemo from "./components/UseReducerDemo";
+import ListCustomers from "./components/ListCustomers";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
               <Route path="/gadgets-redux" element={<GadgetStoreRedux/>}/>
               <Route path="/cart" element={<ViewCart/>}/>
               <Route path="/reducer" element={<UseReducerDemo/>}/>
+              <Route path="/customers" element={<ListCustomers/>}/>
               <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
         </section>

@@ -69,7 +69,9 @@ app.post("/refreshToken", authController.refreshToken);
 //GET Product
 app.get("/products", (req, resp) => {
 
-    resp.json(products);
+    setTimeout(() => {
+        resp.json(products);
+    }, 4000);  
     
 });
 app.get("/secure_products", (req, resp) => {
