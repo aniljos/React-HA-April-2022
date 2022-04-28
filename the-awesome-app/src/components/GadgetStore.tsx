@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, } from 'react-redux';
 import { CartItem } from '../model/CartItem';
 import { Product } from '../model/Product';
 import { createAddToCartAction } from '../redux/actionCreators';
@@ -9,7 +9,7 @@ function GadgetStore(){
 
     const [products, setProducts] = useState<Array<Product>>([]);
     const dispatch = useDispatch<AppDisptach>();
-
+    
     useEffect(() => {
 
         fetchProducts();

@@ -9,6 +9,11 @@ import { AppThemeContext } from "./context/AppThemeContext";
 import AppThemeProvider from "./context/AppThemeProvider";
 import AppErrorBoundary from "./components/AppErrorBoundary";
 import MuiApp from './MuiApp';
+import { accessTokenInterceptor } from "./fetch-interceptor/interceptor";
+
+
+accessTokenInterceptor();
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

@@ -5,7 +5,7 @@ import TypedCounter from "./components/TypedCounter";
 import ListProducts from "./components/ListProducts";
 import Search from "./components/Search";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter  as Router, Routes, Route, Link, Navigate } from "react-router-dom";
+import { BrowserRouter  as Router, Routes, Route, Link, Navigate, useParams } from "react-router-dom";
 import Login from "./components/Login";
 import HooksDemo from "./components/HooksDemo";
 import GadgetStore from "./components/GadgetStore";

@@ -117,7 +117,7 @@ function MuiApp() {
           </Drawer>
         </Box>
         <Grid container spacing={2}>
-          <Grid item sx={{m: 2}} xs={12}>
+          <Grid item sx={{m: 2}} xs={12} md={6} lg={2}>
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
               

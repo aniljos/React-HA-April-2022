@@ -25,7 +25,8 @@ export interface AppRoute{
     component: any,
     secure: boolean,
     menu:boolean,
-    icon?: any
+    icon?: any,
+    props?: {}
 }
 
 export const AppRoutes: Array<AppRoute> = [
@@ -46,7 +47,9 @@ export const AppRoutes: Array<AppRoute> = [
         component: TypedCounter,
         secure: false,
         menu: true,
-        icon: TimerIcon
+        icon: TimerIcon,
+        props: {initCount: 5}
+
     },
     {
         id: 3,

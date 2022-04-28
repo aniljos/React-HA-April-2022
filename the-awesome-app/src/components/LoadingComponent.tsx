@@ -13,8 +13,6 @@ function LoadingComponent(){
     else{
        return ( <div></div> );
     }
-    
-
 }
 
 export default LoadingComponent;

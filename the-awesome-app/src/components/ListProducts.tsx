@@ -61,7 +61,7 @@ class ListProducts extends PureComponent<ListProductsProps, ListProductsState> {
       if (url) {
         const response = await trackPromise(fetch(url, {
           headers: {
-            "authorization" : "bearer " + this.props.auth.accessToken
+          //  "authorization" : "bearer " + this.props.auth.accessToken
           }
         }));
         if(response.ok){
@@ -180,7 +180,7 @@ class ListProducts extends PureComponent<ListProductsProps, ListProductsState> {
   renderProducts() {
     return this.state.products.map((item, index) => {
       return (
-        <div className="product" key={item.id}>
+        <div data-testid="prd" className="product" key={item.id}>
           <p>Id: {item.id}</p>
           <p>Name: {item.name}</p>
           <p>Price: {item.price}</p>
